@@ -19,7 +19,6 @@ const number = n => {
     return unaryNumber(n);
   return `+[${listNumber(n)}]`;
 }
-console.log(number(10));
 
 const map = {};
 
@@ -33,21 +32,21 @@ const fromString = s => s.split("").map(fromChar).join('+');
 
 
 for (let i = 0; i < 10; i++)
-  map[i+[]] = number(i)+"+[]";
+  map[i + []] = number(i) + "+[]";
 
 map["10"] = "[+!+[]]+[+[]]+[]";
-map["11"]= "[+!+[]]+[+!+[]]+[]";
-map["100"]= "[+!+[]]+[+[]]+[+[]]+[]";
+map["11"] = "[+!+[]]+[+!+[]]+[]";
+map["100"] = "[+!+[]]+[+[]]+[+[]]+[]";
 
 
 //[object Object]//console.log({}+[]);
 map['['] = `([]+{})[${number(0)}]`;
-map.o    = `([]+{})[${number(1)}]`;
-map.b    = `([]+{})[${number(2)}]`;
-map.j    = `([]+{})[${number(3)}]`;
-map.c    = `([]+{})[${number(5)}]`;
+map.o = `([]+{})[${number(1)}]`;
+map.b = `([]+{})[${number(2)}]`;
+map.j = `([]+{})[${number(3)}]`;
+map.c = `([]+{})[${number(5)}]`;
 map[' '] = `([]+{})[${number(7)}]`;
-map.O    = `([]+{})[${number(8)}]`;
+map.O = `([]+{})[${number(8)}]`;
 map[']'] = `([]+{})[${number(14)}]`;
 //false//console.log(![]+[]);
 map.f = `([]+![])[${number(0)}]`;
@@ -68,9 +67,6 @@ map.y = `([]+(+!![]/+[]))[${number(7)}]`;
 map.u = `([]+[][[]])[${number(0)}]`;
 map.n = `([]+[][[]])[${number(1)}]`;
 map.d = `([]+[][[]])[${number(2)}]`;
-
-// console.log(eval(`${fromString("11e100")}`));
-// map['.'] = 
 
 //function RegExp() { [native code] }//console.log(eval(`([]+(/!/)[${fromString('constructor')}])`));
 map.R = `([]+(/!/)[${fromString("constructor")}])[${number(9)}]`;
@@ -108,18 +104,16 @@ map['%'] = `((()=>{})[${fromString("constructor")}](${fromString("return escape"
 map.C = `((()=>{})[${fromString("constructor")}](${fromString("return escape")})()(${map['\\']}))[${number(2)}]`;
 //NaN//console.log(+{}+[]);
 map.N = `(+{}+[])[${number(0)}]`;
-map["1.1e+101"] = `+[[+!+[]]+[+!+[]]+[${map.e}]+[+!+[]]+[+[]]+[+[]]]+[]`;
 //1.1e+101//console.log(eval(`+[[+!+[]]+[+!+[]]+[${map.e}]+[+!+[]]+[+[]]+[+[]]]+[]`));
-map['.'] = `(+[[+!+[]]+[+!+[]]+[${map.e}]+[+!+[]]+[+[]]+[+[]]]+[])[${number(1)}]`;
-map['+'] = `(+[[+!+[]]+[+!+[]]+[${map.e}]+[+!+[]]+[+[]]+[+[]]]+[])[${number(4)}]`;
-console.log()
+map['.'] = `(+[${listNumber(11)}+[${map.e}]+${listNumber(100)}]+[])[${number(1)}]`;
+map['+'] = `(+[${listNumber(11)}+[${map.e}]+${listNumber(100)}]+[])[${number(4)}]`;
 
 
 console.log("constructor length: " + fromString("constructor").length);
 
 const compile = code => `(()=>{})[${fromString("constructor")}](${fromString(code)})()`;
 
-const code = compile("console.log(\"Hello world!\");");
+const code = compile("console.log('Hello world!');");
 //console.log(code);
 console.log("Hello world length: " + code.length);
 eval(code);
