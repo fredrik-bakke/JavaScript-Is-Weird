@@ -2,7 +2,7 @@ import {map, words, encode, encodeChar, compile} from "./encode.mjs"
 
 let missing = ""
 
-for (let letter of "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/\\()[]{}!@#$%^&*_-+=|:;<>,.?/'\"`~") {
+for (let letter of "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/\\()[]{}!@#$%^&*_-+=|:;<>,.?/'\"`~ ") {
   if (!(letter in map))
     missing += letter
 }
