@@ -1,4 +1,4 @@
-import {map, words, encode, encodeChar, compile} from "./encode.mjs"
+import {map, words, encode, encodeChar, encodeChars, compile} from "./encode.mjs"
 
 let missing = ""
 
@@ -37,7 +37,12 @@ let missingPerf = perf(missing)
 console.log(`There are ${missing.length} unmapped characters. Average code length is ${Math.round(missingPerf)}.`)
 
 
+const commonWords = ["constructor", "toString", "name", "toCharCode", "return escape", "return Date", "fontcolor", "slice", "concat", "flat"]
 
+console.log("\nEncoding length of common words:")
+for(let word of commonWords) {
+  console.log(`${word}: ${encode(word).length}`);
+}
 
 const code = compile('console.log("Hello world!");')
 // console.log(code)
