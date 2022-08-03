@@ -49,3 +49,5 @@ const code = compile('console.log("Hello world!");')
 
 console.log("Hello world length: " + code.length)
 eval(code)
+
+console.log(code)
