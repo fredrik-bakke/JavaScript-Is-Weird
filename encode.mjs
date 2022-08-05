@@ -134,7 +134,6 @@ map.F = `(+[]+(()=>{})[${encode("constructor")}])[${sNumber(10)}]`
 
 
 
-
 words["String"] = `''[${encode("constructor")}][${encode("name")}]`
 map.S = `(+[]+''[${encode("constructor")}])[${sNumber(10)}]`
 //function RegExp() { [native code] }
@@ -149,6 +148,8 @@ map.p = `('!'+![]+/!/[${encode("constructor")}])[${sNumber(20)}]`
 map.h = `(${number(101)})[${encode("toString")}](${sNumber(21)})[${sNumber(1)}]`
 map.k = `(${number(20)})[${encode("toString")}](${sNumber(21)})`
 map.v = `(${number(31)})[${encode("toString")}](${sNumber(32)})`
+console.log(map.v.length)
+console.log(eval("[[][[[]+[][+[]]][+[]][++[++[++[++[[]][+[]]][+[]]][+[]]][+[]]]+[[]+[][+[]]][+[]][++[++[++[++[++[[]][+[]]][+[]]][+[]]][+[]]][+[]]]+[[]+[][+[]]][+[]][++[[]][+[]]]+[[]+[][+[]]][+[]][++[++[[]][+[]]][+[]]]]+[]][+[]][+[[]+[++[++[[]][+[]]][+[]]][+[]]+[++[++[++[[]][+[]]][+[]]][+[]]][+[]]][+[]]]"))
 map.w = `(${number(32)})[${encode("toString")}](${sNumber(33)})`
 map.z = `(${number(35)})[${encode("toString")}](${sNumber(36)})`
 
