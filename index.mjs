@@ -1,4 +1,4 @@
-import {map, words, encode, encodeChar, encodeChars, compile} from "./encode.mjs"
+import {map, words, encode, encodeChar, compile} from "./encode.mjs"
 
 let missing = ""
 
@@ -6,7 +6,7 @@ for (let letter of "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567
   if (!(letter in map))
     missing += letter
 }
-console.log(missing)
+console.log("Unmapped characters: " + missing)
 
 for (const [key, value] of Object.entries(map)) {
   let actual = eval(value)
@@ -45,7 +45,9 @@ for(let word of commonWords) {
 }
 
 const code = compile('console.log("Hello world!");')
-// console.log(code)
+//console.log(code)
+const code2 = compile(code)
+console.log(code2.length)
 
 console.log("Hello world length: " + code.length)
 eval(code)

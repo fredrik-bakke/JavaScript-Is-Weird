@@ -46,7 +46,7 @@ function sNumber(n) {
 }
 
 const map = {}
-const words = {} // For strings of connected characters
+const words = {} // For strings of multiple characters
 
 function checkWords(str, pos) {
   for (const [key, value] of Object.entries(words))
@@ -175,9 +175,22 @@ map[':'] = `([]+/!/[${encode("constructor")}]())[${sNumber(3)}]`
 
 map[','] = `[[]][${encode("concat")}]([[]])+[]`
 
+// Symbols in alphabet
+let alphabet = "";
+for (const [_, value] of Object.entries(map)) {
+  for (let chr of value)
+    if (!alphabet.includes(chr))
+      alphabet += chr
+}
+
+function madeOf(str, alphabet) {
+  for(let char of str)
+    if (!alphabet.includes(char))
+      return false;
+  return true;
+}
 
 
-
-const compile = code => `(()=>{})[${encode("constructor")}](${encode(code)})()`
+const compile = code => madeOf(code, alphabet) ? code : `(()=>{})[${encode("constructor")}](${encode(code)})()`
 
 export {encode, encodeChar, encodeChars, compile, map, words}
