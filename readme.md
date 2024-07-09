@@ -1,0 +1,1 @@
+This repository builds on @lowbyteproductions' YouTube video [JavaScript is Weird (EXTREME EDITION)](https://youtu.be/sRWE5tnaxlI) and accompanying [GitHub hosted code](https://github.com/lowbyteproductions/JavaScript-Is-Weird).

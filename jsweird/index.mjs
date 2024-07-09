@@ -1,4 +1,6 @@
-import {map, words, encode, encodeChar, compile} from "./encode.mjs"
+import { map, words, encode, encodeChar, compile, alphabet } from "./encode.mjs"
+
+console.log(`alphabet consists of "${alphabet.join()}"`)
 
 let missing = ""
 
@@ -11,12 +13,12 @@ console.log("Unmapped characters: " + missing)
 for (const [key, value] of Object.entries(map)) {
   let actual = eval(value)
   if (actual !== key)
-    console.error(`The char code for '${key}' is wrong! It evaluated to ${actual}.`)
+    console.error(`The char code for '${key}' of type ${typeof key} is wrong! It evaluated to ${actual} of type ${typeof actual}.`)
 }
 for (const [key, value] of Object.entries(words)) {
   let actual = eval(value)
   if (actual !== key)
-    console.error(`The word code for '${key}' is wrong! It evaluated to ${actual}.`)
+    console.error(`The word code for '${key}' is wrong! It evaluated to ${actual} of type ${typeof actual}.`)
 }
 
 
@@ -40,7 +42,8 @@ console.log(`There are ${missing.length} unmapped characters. Average code lengt
 const commonWords = ["constructor", "toString", "name", "toCharCode", "return escape", "return Date", "fontcolor", "slice", "concat", "flat"]
 
 console.log("\nEncoding length of common words:")
-for(let word of commonWords) {
+console.log("\nEncoding length of common words:")
+for (let word of commonWords) {
   console.log(`${word}: ${encode(word).length}`);
 }
 
@@ -49,5 +52,6 @@ const code = compile('console.log("Hello world!");')
 const code2 = compile(code)
 console.log(code2.length)
 
+console.log(code)
 console.log("Hello world length: " + code.length)
 eval(code)
