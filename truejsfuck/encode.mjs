@@ -79,9 +79,8 @@ register('++[[]][+[]]+[++[[]][+[]]]', '11')
 register('++[++[[]<[,,]][+[]]+[+[]]][+[]]', 21)
 
 register('[]+-[]', '0')
-// register('+[]+[]', '0')
 register('[+[]]+-[]', '00')
-// register('+[]+[+[]]', '00')
+register('[+[]]+-[]+-[]', '000')
 
 /******************************* NUMBER METHODS *******************************/
 
@@ -205,8 +204,6 @@ register(`[${get('false')}][${get(0)}][${get(0)}]`, 'f')
 register(`[${get('false')}][${get(0)}][${get(2)}]`, 'l')
 register(`[${pad_nonstring(7)}+[[]<[]]][${get(0)}][${encode_number_anytype(10)}]`, 's')
 
-console.log(get('s').length, eval(get('s')))
-
 register(`[${get('true')}][${get(0)}][${get(0)}]`, 't')
 register(`[${get('true')}][${get(0)}][${get(1)}]`, 'r')
 register(`[${get('undefined')}][${get(0)}][${get(0)}]`, 'u')
@@ -232,7 +229,6 @@ register(`[${pad_nonstring(2)}+${get(-Infinity)}][${get(0)}][${encode_number_any
 register(encode_function('at'))
 register(`[]+${encode_function('at')}`)
 register(`[${pad_nonstring(4)}+${encode_function('at')}][+[]][${encode_number_anytype(10)}]`, 'o')
-register(`[[]+${encode_function('at')}][+[]][${encode_number_anytype(3)}]`, 'c')
 register(`[${pad_nonstring(7)}+${encode_function('at')}][+[]][${encode_number_anytype(10)}]`, 'c')
 register(`[[]+${encode_function('at')}][+[]][${encode_number_anytype(11)}]`, '(')
 register(`[[]+${encode_function('at')}][+[]][${encode_number_anytype(12)}]`, ')')
@@ -271,18 +267,19 @@ register(`[[]+[]][+[]][${encode_chars("constructor")}][${encode_chars("name")}]`
 // map['='] = `([]+/=/)[${encodeNumberUnstable(1)}]`
 // map['>'] = `([]+/>/)[${encodeNumberUnstable(1)}]`
 
-register(`[${encode_number(101)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(21)})[${encode_number(1)}]`, 'h')
-register(`[${encode_number(101)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(21)})`)
-register(`[${encode_number(19)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(20)})`, 'j')
-register(`[${encode_number(20)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(21)})`, 'k')
-register(`[${encode_number(25)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(30)})`, 'p')
-register(`[${encode_number(26)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(30)})`, 'q')
-// map['v'] = `(${encodeNumber(31)})[${encode("toString")}](${encodeNumberUnstable(32)})`
-// register(`(${encode_number(31)})[${encode_chars("to")}+${get("String")}](${encode_number_anytype(32)})`, 'v')
-register(`[${encode_number(35)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(36)})`, 'z')
-register(`[${encode_number(33)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(35)})`, 'x')
-register(`[${encode_number(32)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(33)})`, 'w')
-
+// ! The below all use parentheses `()` to invoke a function
+if (false) {
+  register(`[${encode_number(101)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(21)})[${encode_number(1)}]`, 'h')
+  register(`[${encode_number(101)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(21)})`)
+  register(`[${encode_number(19)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(20)})`, 'j')
+  register(`[${encode_number(20)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(21)})`, 'k')
+  register(`[${encode_number(25)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(30)})`, 'p')
+  register(`[${encode_number(26)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(30)})`, 'q')
+  // register(`(${encode_number(31)})[${encode_chars("to")}+${get("String")}](${encode_number_anytype(32)})`, 'v')
+  register(`[${encode_number(35)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(36)})`, 'z')
+  register(`[${encode_number(33)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(35)})`, 'x')
+  register(`[${encode_number(32)}][+[]][${encode_chars("to")}+${get("String")}](${encode_number_anytype(33)})`, 'w')
+}
 // map['%'] = `(()=>{})[${encode("constructor")}](${encode("return escape")})()(${map['!']})[${encodeNumberUnstable(0)}]`
 // map['C'] = `(()=>{})[${encode("constructor")}](${encode("return escape")})()(${map['\\']})[${encodeNumberUnstable(2)}]`
 
@@ -304,7 +301,7 @@ register(`[${encode_number(32)}][+[]][${encode_chars("to")}+${get("String")}](${
 // Symbols in alphabet
 const _alphabet = [];
 for (const [_, submap] of Object.entries(map)) {
-  for (const [key, encoding] of Object.entries(submap)) {
+  for (const [_, encoding] of Object.entries(submap)) {
     for (let i = 0; i < encoding.length; i++) {
       const chr = encoding[i]
       if (!_alphabet.includes(chr))
@@ -330,8 +327,8 @@ console.log(map)
 /** Compute statistics */
 let cum = 0
 let encoding_lengths = []
-for (const [type, submap] of Object.entries(map)) {
-  for (const [key, encoding] of Object.entries(submap)) {
+for (const [_, submap] of Object.entries(map)) {
+  for (const [_, encoding] of Object.entries(submap)) {
     cum += encoding.length
     encoding_lengths.push(encoding.length)
   }
